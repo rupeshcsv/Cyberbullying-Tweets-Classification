@@ -15,18 +15,24 @@ predictions = {'age': 'Age-based cyber-bullying',
                'ethnicity': 'Ethnicity-based cyber-bullying'}
 
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 def home():
-    return render_template('home.html', result_text='Result appears here')
-
-
-@app.route('/result', methods=['GET', 'POST'])
-def result():
     text = 'error'
     if request.method == 'POST':
         text = request.form['text']
-    prediction = model1.predict([text])[0]
-    return render_template('home.html', result_text=f'{predictions[prediction]}')
+        prediction = model1.predict([text])[0]
+        return render_template('home.html', result_text=f'{predictions[prediction]}')
+    else:
+        return render_template('home.html', result_text='Result appears here')
+
+
+# @app.route('/', methods=['GET', 'POST'])
+# def result():
+#     text = 'error'
+#     if request.method == 'POST':
+#         text = request.form['text']
+#     prediction = model1.predict([text])[0]
+#     return render_template('home.html', result_text=f'{predictions[prediction]}')
 
 
 if __name__ == '__main__':
