@@ -3,13 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Cyberbullying Classification</title>
+    <style>
+        body {
+            background-color: #3FCDFF;
+            margin: 0;
+            padding: 0;
+        }
+        .content {
+            display: grid;
+            background-color: #3FCDFF;
+            height: 100vh;
+            place-items: center;
+        }
+        h3 {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
+    <div class="content">
     <form action="{{url_for('result')}}" method="POST">
-        <h2>Enter your text</h2>
-        <input id="text" name="text" type="text">
+        <input id="text" name="text" type="text" placeholder="Enter a tweet here" size="50">
         <button id="submit" type="submit">Analyze</button>
         <h3>{{result_text}}</h3>
     </form>
+    </div>
 </body>
 </html>

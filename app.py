@@ -7,10 +7,17 @@ file1 = open('models/model_lr.pkl', 'rb')
 model1 = pickle.load(file1)
 file1.close()
 
+predictions = {'age': 'Age-based cyber-bullying',
+               'gender': 'Gender-based cyber-bullying',
+               'not_cyberbullying': 'No cyber-bullying',
+               'other_cyberbullying': 'General cyber-bullying',
+               'religion': 'Religion-based cyber-bullying',
+               'ethnicity': 'Ethnicity-based cyber-bullying'}
+
 
 @app.route('/', methods=['GET'])
 def home():
-    return render_template('home.html')
+    return render_template('home.html', result_text='Result appears here')
 
 
 @app.route('/result', methods=['GET', 'POST'])
@@ -19,7 +26,7 @@ def result():
     if request.method == 'POST':
         text = request.form['text']
     prediction = model1.predict([text])[0]
-    return render_template('home.html', result_text=f'{prediction}')
+    return render_template('home.html', result_text=f'{predictions[prediction]}')
 
 
 if __name__ == '__main__':
